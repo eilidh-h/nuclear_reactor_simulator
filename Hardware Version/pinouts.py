@@ -1,0 +1,32 @@
+import DAC8532
+# ==============================
+# GPIO Pin Definitions
+# ==============================
+SDS1_INPUT = 8
+SDS2_INPUT = 10
+SAFETY_TOGGLE_INPUT = 7
+SAFETY_ON_OUTPUT = 3
+# SAFETY_OFF_OUTPUT = 5
+SIREN_OUTPUT = 18
+SIM_ON_INPUT = 29
+SIM_ON_LIGHT_OUTPUT = 22
+USER_ACTION_LIGHT_OUTPUT = 32
+SIM_PAUSE_INPUT = 31
+RESET_SIM_INPUT = 33
+SIM_PAUSE_LIGHT_OUTPUT = 36
+SIREN_ENABLED = 35
+SDS1_STATUS = 32
+SDS2_STATUS = 37
+
+# ==============================
+# ADC/DAC Definitions
+# ==============================
+SIM_SPEED_CH = 2
+ADJ_RODS_CH = 1
+LZC_CH = 0
+MCA_CH = 3
+REFUEL_CH = 4
+TEMP_OUTPUT = DAC8532.channel_B
+POWER_OUTPUT = DAC8532.channel_A
+
+
