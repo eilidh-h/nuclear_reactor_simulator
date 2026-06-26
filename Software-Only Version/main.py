@@ -21,7 +21,7 @@ from PyQt6.uic import loadUi
 
 import numpy as np
 import pyqtgraph as pg
-from candu_realtime_sim_v11b_gui import CanduRealtimeSim, PlantParams
+from candu_realtime_sim import CanduRealtimeSim, PlantParams
 import time
 
 # ============================================================
@@ -53,7 +53,7 @@ class MainGUIWindow(QMainWindow):
         Initialize the GUI window, simulation backend, and all UI elements.
         """
         super().__init__()
-        loadUi("Sim_Integration_GUI.ui", self)
+        loadUi("Software_Only_GUI.ui", self)
 
         #self.window = loadUi("Sim_Integration_GUI.ui")
         self.showMaximized()
