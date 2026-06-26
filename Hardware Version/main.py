@@ -24,7 +24,7 @@ from PyQt6.uic import loadUi
 
 import numpy as np
 import pyqtgraph as pg
-from candu_realtime_sim_v11b_gui import CanduRealtimeSim, PlantParams
+from candu_realtime_sim import CanduRealtimeSim, PlantParams
 import time
 import ADS1256
 import DAC8532
