@@ -1,21 +1,7 @@
-# CANDU Reactor Simulator Hardware Integration
-
-**Project README Template**
-( Fill this in)
----
+# CANDU Nuclear Reactor Simulator
 
 # Project Overview
-
-Provide a brief description of the project, including:
-
-* Purpose of the simulator
-* Key features
-* Intended audience/users
-* High-level system architecture
-
-Example:
-
-> This project is a hardware-integrated CANDU reactor simulator built using Python, PyQt6, Raspberry Pi GPIO, ADC/DAC hardware, and a real-time reactor simulation backend. The system provides physical controls and indicators for interacting with a simulated reactor plant.
+This project is a hardware-integrated CANDU reactor simulator built using Python, PyQt6, Raspberry Pi GPIO, ADC/DAC hardware, and a real-time reactor simulation backend as a part of the University of Saskatchewan's 2025/26 engineering capstone. The system provides physical controls and indicators for interacting with a simulated reactor plant. This repository also houses a software only version of the simulation which can be run on any computer and does not require hardware inputs.
 
 ---
 
@@ -24,16 +10,23 @@ Example:
 Describe the purpose of each major file/folder.
 
 ```text
-project_root/
-│
-├── main_gui.py                  # Main GUI application
-├── candu_realtime_sim.py        # Reactor simulation backend
-├── pinouts.py                   # GPIO / ADC / DAC channel definitions
-├── Hardware_Integrated_GUI.ui   # Qt Designer UI file
-├── ADS1256.py                   # ADC driver
-├── DAC8532.py                  # DAC driver
-├── assets/                      # Images/icons/etc.
-├── docs/                        # Documentation and schematics
+main/
+├── Current Design Files/        # Contains all hardware information
+    ├── Datasheets/                  # Contains datasheets for parts used in the original design
+    ├── Case Files/                  # Contains .SLDPRT drawings for the case and parts used
+    ├── Circuitry Files/             # Contains modular circuit designs for each type of input
+    ├── Fission Vision - Simulator Parts list.xlsx # Master list of all parts and costings
+├── Hardware Version/            # Scripts for simulation with hardware
+    ├── ADS1256.py                   # ADC driver
+    ├── DAC8532.py                   # DAC driver
+    ├── Hardware_Integrated_GUI.ui   # Qt Designer UI file
+    ├── candu_realtime_sim.py        # Reactor simulation backend
+    ├── main.py                      # hardware main script
+    ├── pinouts.py                   # Raspberry Pi Pin out config
+├── Software-Only Version/       # Scripts for simulation with software only
+    ├── Software_Only_GUI.ui         # Qt Designer UI file
+    ├── candu_realtime_sim.py        # Reactor simulation backend
+    ├── main.py                      # software-only main script
 └── README.md
 ```
 
