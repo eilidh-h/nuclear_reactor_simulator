@@ -55,14 +55,9 @@ The full parts list can be found in ```main/Current Design Files/Fission Vision 
 ---
 
 # Software Requirements
-
-List all software dependencies.
-
 ## Operating System
 
-* Raspberry Pi OS Version:
-
-  * Example: Raspberry Pi OS Bookworm 64-bit
+* Raspberry Pi OS: Raspberry Pi OS (64-bit)
 
 ## Python Version
 
@@ -75,53 +70,9 @@ pip install pyqt6
 pip install pyqtgraph
 pip install numpy
 pip install RPi.GPIO
+pip install time
+pip install threading
 ```
-
-## Additional Packages
-
-List any apt/system packages required:
-
-```bash
-sudo apt update
-sudo apt install python3-pyqt6
-sudo apt install qt6-tools-dev-tools
-```
-
----
-
-# Raspberry Pi Setup Instructions
-
-## 1. Flash Raspberry Pi OS
-
-Describe:
-
-* Download Raspberry Pi Imager
-* Select OS
-* Flash SD Card
-* Enable SSH/Wi-Fi if desired
-
-## 2. Initial Configuration
-
-```bash
-sudo raspi-config
-```
-
-Recommended settings:
-
-* Enable SPI
-* Enable I2C (if used)
-* Set hostname
-* Configure locale/timezone
-
-## 3. Enable Required Interfaces
-
-Example:
-
-```bash
-sudo raspi-config
-# Interface Options → SPI → Enable
-```
-
 ---
 
 # Wiring / Pinout Documentation
@@ -161,59 +112,6 @@ Include a table like:
 
 ---
 
-# Installation Instructions
-
-## Clone Repository
-
-```bash
-git clone <repository_url>
-cd <repository_name>
-```
-
-## Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-# Running the Program
-
-## Launch Application
-
-```bash
-python3 main_gui.py
-```
-
-## Auto-Start on Boot (Optional)
-
-Explain if applicable:
-
-* systemd service setup
-* desktop autostart setup
-
----
-
-# Calibration / Configuration
-
-## ADC Calibration
-
-Explain:
-
-* Expected voltage ranges
-* Potentiometer calibration procedure
-* Noise thresholds
-
-## DAC Calibration
-
-Explain:
-
-* Gauge/light scaling
-* Output voltage verification
-
----
-
 # How to Use the Simulator
 
 ## Startup Procedure
@@ -223,81 +121,101 @@ Explain:
 3. Wait for initialization
 4. Reset to steady state
 
-## Controls Overview
+## Software controls Overview
 
-Describe each control:
+### `speed`
+Sets the reactor simulation speed relative to real time.
 
-### Liquid Zone Control
-
-* Function:
-* Range:
-* Effect on simulation:
-
-### Adjuster Rods
-
-* Function:
-* Range:
-* Effect on simulation:
-
-### SDS1 / SDS2
-
-* Function:
-* Trigger behavior:
-
-### Safety Toggle
-
-* Function:
-* Effect:
+- **Units:** Reactor seconds per wall-clock second
+- **Example:**
+  ```text
+  speed = 60
+  ```
+  This means **1 real second = 1 reactor minute**.
 
 ---
 
-# Operating Logic / Safety Features
+### `goal`
+Sets the operator's target power fraction.
 
-Document:
-
-* Meltdown conditions
-* Siren logic
-* Automatic reset behavior
-* Pause/Resume logic
-* Safety interlocks
+This value is intended primarily for the simulator's game mode, where the operator attempts to match the requested power level.
 
 ---
 
-# Troubleshooting
+### `lzc`
+Sets the average Liquid Zone Controller (LZC) fill level.
 
-## GUI Will Not Launch
-
-Possible causes:
-
-* Missing PyQt6
-* Incorrect Python version
-* Missing UI file
-
-## Hardware Not Responding
-
-Possible causes:
-
-* SPI disabled
-* Wiring incorrect
-* GPIO permissions issue
-
-## ADC Reads Incorrect Values
-
-Possible causes:
-
-* Loose wiring
-* Incorrect reference voltage
-* Calibration required
+- **Units:** Percent (%)
+- **Neutral value:** `50%`
+- **Behavior:**
+  - Lower fill → Positive reactivity → Reactor power tends to increase.
+  - Higher fill → Negative reactivity → Reactor power tends to decrease.
 
 ---
 
-# Known Issues / Limitations
+### `adj`
+Sets the adjuster rod withdrawal fraction.
 
-Document any limitations:
+- **Range:** `0–1`
+- **Behavior:**
+  - Higher values correspond to greater adjuster rod withdrawal.
+  - Increased withdrawal adds **positive reactivity**.
 
-* GUI blocks briefly during reset
-* No hardware debounce beyond software
-* ADC noise under certain conditions
+---
+
+### `mca`
+Sets the Mechanical Control Absorber (MCA) insertion fraction.
+
+- **Range:** `0–1`
+- **Behavior:**
+  - Higher insertion results in **more negative reactivity**.
+
+---
+
+### `refuel`
+Sets the continuous online refuelling command.
+
+- **Range:** `0–2`
+- Implemented as a continuous control rather than discrete fuelling events.
+- Designed to map naturally to GUI sliders or analogue hardware controls.
+
+---
+
+### `safety`
+Enables or disables the automatic reactor protection system.
+
+When enabled, automatic **stepback** and **shutdown** logic will operate if required.
+
+---
+
+### `trip sds1`
+Manually initiates a shutdown using **Shutdown System 1 (SDS1)**.
+
+---
+
+### `trip sds2`
+Manually initiates a shutdown using **Shutdown System 2 (SDS2)**.
+
+---
+
+### `reset sds`
+Clears the shutdown latches.
+
+This command is only accepted when reactor power is **below 1% full power**.
+
+---
+
+### `reset steady`
+Resets the simulator to the nominal startup state.
+
+This performs a complete re initialization of the reactor state.
+
+
+# Known simulation simplifications
+* one delayed-neutron group instead of six
+* lumped thermal states instead of detailed HTS / SG thermodynamics
+* normalized poison states instead of full iodine/xenon number densities
+* simplified shutdown logic compared with plant-grade 2-out-of-3 voting
 
 ---
 
@@ -309,46 +227,5 @@ List planned enhancements:
 * Improve meltdown reset UI
 * Add data logging/export
 * Add calibration GUI
-
----
-
-# Contributors
-
-List team members and roles.
-
-| Name        | Role                            |
-| ----------- | ------------------------------- |
-| Your Name   | Software / Hardware Integration |
-| Team Member | Simulation Backend              |
-
----
-
-# License
-
-Specify project license if applicable.
-
-Example:
-
-> This project is licensed under the MIT License.
-
----
-
-# Appendix
-
-## Electrical Schematics
-
-Link or include:
-
-* Wiring diagrams
-* PCB schematics
-* Breadboard layouts
-
-## References
-
-Include:
-
-* Hardware datasheets
-* Simulation references
-* External libraries used
 
 ---
