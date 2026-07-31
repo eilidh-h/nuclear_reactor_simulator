@@ -70,58 +70,10 @@ pip install pyqt6
 pip install pyqtgraph
 pip install numpy
 pip install RPi.GPIO
-pip install time
 pip install threading
 ```
 ---
-
-# Wiring / Pinout Documentation
-
-## GPIO Pin Assignments
-
-Include a table like:
-
-| Function      | GPIO Pin | Physical Pin | Direction |
-| ------------- | -------- | ------------ | --------- |
-| SDS1 Button   | GPIO17   | Pin 11       | Input     |
-| SDS2 Button   | GPIO27   | Pin 13       | Input     |
-| Safety Toggle | GPIO22   | Pin 15       | Input     |
-| Siren Output  | GPIO23   | Pin 16       | Output    |
-| Pause Light   | GPIO24   | Pin 18       | Output    |
-
----
-
-## ADC Channel Assignments
-
-| Control             | ADC Channel |
-| ------------------- | ----------- |
-| Liquid Zone Control | CH0         |
-| Adjuster Rods       | CH1         |
-| MCA                 | CH2         |
-| Refuel Rate         | CH3         |
-| Simulation Speed    | CH4         |
-
----
-
-## DAC Channel Assignments
-
-| Output            | DAC Channel |
-| ----------------- | ----------- |
-| Temperature Gauge | DAC0        |
-| Power Gauge       | DAC1        |
-
----
-
-# How to Use the Simulator
-
-## Startup Procedure
-
-1. Power on Raspberry Pi
-2. Launch software
-3. Wait for initialization
-4. Reset to steady state
-
-## Software controls Overview
+# Software controls Overview
 
 ### `speed`
 Sets the reactor simulation speed relative to real time.
@@ -221,11 +173,14 @@ This performs a complete re initialization of the reactor state.
 
 # Future Improvements
 
-List planned enhancements:
-
-* Add hardware watchdog
-* Improve meltdown reset UI
-* Add data logging/export
-* Add calibration GUI
+Ideas for possible enhancements:
+* Developing lesson materials for use with the simulator
+* Creating interesting scenarios (power grid failure, start the reactor from cold, etc.)
+* Adding an automatic mode like real CANDU reactors with a PID controller based on the steam pressure error
+* Adding a graphic of a CANDU plant to the GUI to show how energy moves around the plant
+* More robust simulation feedback and event logs
+* Implementing a “power-matching” game mode
+* Additional speed and performance testing and improvement
+* Further refinements of the case to improve transport, packing, and ease of use
 
 ---
