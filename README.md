@@ -1,13 +1,11 @@
 # CANDU Nuclear Reactor Simulator
 
 # Project Overview
-This project is a hardware-integrated CANDU reactor simulator built using Python, PyQt6, Raspberry Pi GPIO, ADC/DAC hardware, and a real-time reactor simulation backend as a part of the University of Saskatchewan's 2025/26 engineering capstone. The system provides physical controls and indicators for interacting with a simulated reactor plant. This repository also houses a software only version of the simulation which can be run on any computer and does not require hardware inputs.
+This project is a hardware-integrated CANDU reactor simulator built using Python, PyQt6, Raspberry Pi GPIO, ADC/DAC hardware, and a real-time reactor simulation backend. The system provides physical controls and indicators for interacting with a simulated reactor plant. This repository also houses a software only version of the simulation which can be run on any computer and does not require hardware inputs.
 
 ---
 
 # Repository Structure
-
-Describe the purpose of each major file/folder.
 
 ```text
 main/
@@ -33,16 +31,15 @@ main/
 ---
 
 # Hardware Requirements
-
-List all physical components required.
+The full parts list can be found in ```main/Current Design Files/Fission Vision - Simulator Parts List.xlsx ```
 
 ## Core Hardware
 
-* Raspberry Pi (Specify model)
-* MicroSD Card (Minimum recommended size)
+* Raspberry Pi 4 or 5
+* MicroSD Card
 * Power Supply
 * Display/Monitor
-* Keyboard/Mouse (if applicable)
+* Keyboard/Mouse
 
 ## I/O Hardware
 
@@ -54,12 +51,6 @@ List all physical components required.
 * LEDs / Indicator Lights
 * Siren / Buzzer
 * Wiring / Breadboard / PCB
-
-## Optional Hardware
-
-* Enclosure / Panel
-* Cooling fan
-* External speakers
 
 ---
 
